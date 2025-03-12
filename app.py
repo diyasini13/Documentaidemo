@@ -13,7 +13,7 @@ project_id = "docai-428805"
 location = "us"
 
 client = documentai.DocumentProcessorServiceClient()
-name = f"projects/427625783791/locations/us/processors/1875d368769573dc"
+name = f"projects/633630984866/locations/us/processors/133651480da5bf2c"
 # os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'path/to/your/credentials.json'
 # os.environ['GOOGLE_CLOUD_PROJECT'] = 'your_project_id'
 
