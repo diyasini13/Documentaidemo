@@ -14,8 +14,8 @@ location = "us"
 
 client = documentai.DocumentProcessorServiceClient()
 name = f"projects/427625783791/locations/us/processors/1875d368769573dc"
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'path/to/your/credentials.json'
-os.environ['GOOGLE_CLOUD_PROJECT'] = 'your_project_id'
+# os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'path/to/your/credentials.json'
+# os.environ['GOOGLE_CLOUD_PROJECT'] = 'your_project_id'
 
 st.title("Invoice Parsing using DocAI")
 
