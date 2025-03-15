@@ -6,7 +6,8 @@ import os
 import json
 from streamlit_pdf_viewer import pdf_viewer
 import auth_token
-
+import vertexai
+from vertexai.generative_models import GenerativeModel
 
 
 project_id = "docai-428805"
@@ -77,6 +78,27 @@ def app():
                 file_name="extracted_data.json",
                 mime="application/json",
             )
+
+
+            # --- Generate Summary using Gemini ---
+            st.header("Document Summary")
+            try:
+                vertexai.init(project=project_id, location=location)
+                model = GenerativeModel("gemini-2.0-flash-001")
+                
+                # Extract text from the document
+                document_text = document.text
+                
+                # Create a prompt for summarization
+                prompt = f"Summarize the following document:\n\n{document_text}\n\nSummary:"
+                
+                # Generate the summary
+                response = model.generate_content(prompt)
+                summary = response.text
+                
+                st.write(summary)
+            except Exception as e:
+                st.error(f"Error generating summary: {e}")
 
        
 if __name__ == "__main__":
