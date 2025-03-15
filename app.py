@@ -7,7 +7,7 @@ import json
 from streamlit_pdf_viewer import pdf_viewer
 import auth_token
 import vertexai
-from vertexai.generative_models import GenerativeModel
+from vertexai.generative_models import GenerativeModel , Part
 
 
 project_id = "docai-428805"
@@ -86,22 +86,40 @@ def app():
                 vertexai.init(project=project_id, location=location)
                 model = GenerativeModel("gemini-2.0-flash-001")
                 
-                # Extract text from the document
-                document_text = document.text
+                if uploaded_file.type == "application/pdf":
+                  document_content = Part.from_data(
+                      data=uploaded_file.getvalue(),
+                      mime_type="application/pdf",
+                  )
+                else:
+                    document_content = document.text
                 
-                # Create a prompt for summarization
-                prompt = f"""
-                Based on the following document, what is the general content about. Do not include anything about invoice or receipt. 
-                Summarize the key information in 3-4 lines.
-                Document: {document_text}
-                Summary: 
-                """
+                # # Create a prompt for summarization
+                # prompt = f"""
+                # Based on the following document, what is the general content about. Do not include anything about invoice or receipt. 
+                # Summarize the key information in 3-4 lines.
+                # Document: {document_t}
+                # Summary: 
+                # """
                 
-                # Generate the summary
-                response = model.generate_content(prompt)
+                # # Generate the summary
+                # response = model.generate_content(prompt)
+                # summary = response.text
+
+                if isinstance(document_content, str):
+                    contents = [prompt + "\n" + "Document:" + document_content]
+                    st.write("Processing Document")
+                else:
+                    contents = [document_content, prompt]
+                    st.write("Processing PDF")
+
+                response = model.generate_content(contents)
                 summary = response.text
-                
+
+                st.write("Summary generated:")
                 st.write(summary)
+                
+                
             except Exception as e:
                 st.error(f"Error generating summary: {e}")
 
