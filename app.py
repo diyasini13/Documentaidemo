@@ -90,7 +90,12 @@ def app():
                 document_text = document.text
                 
                 # Create a prompt for summarization
-                prompt = f"Summarize the following document:\n\n{document_text}\n\nSummary:"
+                prompt = f"""
+                Based on the following document, what is the general content about. Do not include anything about invoice or receipt. 
+                Summarize the key information in 3-4 lines.
+                Document: {document_text}
+                Summary: 
+                """
                 
                 # Generate the summary
                 response = model.generate_content(prompt)
