@@ -27,8 +27,9 @@ def authentication():
             return "Error"
 
     # Get the token from the query parameter
-    token = st.query_params.get("token", [""])[0]
-
+    # token = st.query_params.get("token", [""])[0]
+    token = st.query_params.get("token", [""])[0] if st.query_params.get("token", [""]) else ""
+    print("Token from new: " , token)
     if not token:
         st.error("Unauthorized access. Token not provided.")
         st.stop()
