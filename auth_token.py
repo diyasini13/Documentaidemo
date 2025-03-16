@@ -27,7 +27,8 @@ def authentication():
             return "Error"
 
     # Get the token from the query parameter
-    token = st.experimental_get_query_params().get("token", [""])[0]
+    # token = st.experimental_get_query_params().get("token", [""])[0]
+    token = st.query_params.get("token", "")
    
     print("Token from new: " , token)
     if not token:
