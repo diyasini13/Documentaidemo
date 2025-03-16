@@ -7,7 +7,7 @@ from google.auth.transport import requests
 load_dotenv()
 
 def authentication():
-    GOOGLE_CLIENT_ID = os.getenv("633630984866-qj00anvn6cu2kahus5ft1cnc4o8pe7dp.apps.googleusercontent.com") # Replace with your client ID
+    GOOGLE_CLIENT_ID = "633630984866-qj00anvn6cu2kahus5ft1cnc4o8pe7dp.apps.googleusercontent.com"# Replace with your client ID
 
     def verify_token(token):
         try:
