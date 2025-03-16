@@ -5,8 +5,8 @@ from google.cloud import documentai_v1 as documentai
 import os
 import json
 from streamlit_pdf_viewer import pdf_viewer
-import auth_tokentry
 import vertexai
+import auth_token
 from vertexai.generative_models import GenerativeModel , Part
 
 
@@ -83,5 +83,5 @@ def app():
             
        
 if __name__ == "__main__":
-        auth_tokentry.authentication();
+        auth_token.authentication();
         app();
