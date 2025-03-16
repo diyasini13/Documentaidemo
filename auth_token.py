@@ -27,9 +27,7 @@ def authentication():
             return "Error"
 
     # Get the token from the query parameter
-    # token = st.query_params.get("token", [""])[0]
-    # token = st.query_params.get("token", [""])[0] if st.query_params.get("token", [""]) else ""
-    token = st.query_params["token"][0]
+    token = st.experimental_get_query_params().get("token", [""])[0]
    
     print("Token from new: " , token)
     if not token:
@@ -45,9 +43,4 @@ def authentication():
     elif decoded == "Error":
         st.error("Error in token verification. Access denied.")
         st.stop()
-    else:
-        st.write("Welcome! You are authenticated.")
-        # You can now use the user information from 'decoded'
-        # st.write(f"User Email: {decoded['email']}")
-        # st.write(f"User Name: {decoded['name']}")
-        # st.write(f"User ID: {decoded['sub']}")
+   
